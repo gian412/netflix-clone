@@ -1,5 +1,5 @@
 import React from 'react';
-import { Item, Inner, Container, Title, SubTitle, Image } from './styles/jumbotron';
+import { Item, Inner, Container, Title, SubTitle, Image, Pane } from './styles/jumbotron';
 
 interface Props {
     children: React.ReactNode;
@@ -36,6 +36,10 @@ Jumbotron.SubTitle = ({ children, ...restProps }: JumbotronProps) => {
 
 Jumbotron.Image = ({ ...restProps }: JumbotronImageProps) => {
     return <Image {...restProps} />;
+};
+
+Jumbotron.Pane = ({ children, ...restProps }: JumbotronProps) => {
+    return <Pane {...restProps}>{children}</Pane>;
 };
 
 export default Jumbotron;

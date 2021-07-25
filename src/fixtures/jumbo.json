@@ -3,7 +3,7 @@
         "id": 1,
         "title": "Enjoy on your TV.",
         "subTitle": "Watch on smart TVs, PlayStation, Xbox, Chromecast, Apple TV, Blu-ray players and more.",
-        "image": "https://github.com/gian412/netflix-clone/blob/main/images/misc/home-imac.jpg",
+        "image": "/images/misc/home-tv.jpg",
         "alt": "Tiger King on Netflix",
         "direction": "row"
     },
