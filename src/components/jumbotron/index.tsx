@@ -1,13 +1,18 @@
 import React from 'react';
-import { Item, Inner, Container } from './styles/jumbotron';
+import { Item, Inner, Container, Title, SubTitle, Image } from './styles/jumbotron';
 
-type Props = {
+interface Props {
     children: React.ReactNode;
-    direction: 'string';
-};
-type ContaierProps = {
+    direction: string;
+}
+interface JumbotronProps {
     children: React.ReactNode;
-};
+}
+
+interface JumbotronImageProps {
+    src: string;
+    alt: string;
+}
 
 const Jumbotron = ({ children, direction, ...restProps }: Props) => {
     return (
@@ -17,8 +22,20 @@ const Jumbotron = ({ children, direction, ...restProps }: Props) => {
     );
 };
 
-Jumbotron.Container = ({ children, ...restProps }: ContaierProps) => {
+Jumbotron.Container = ({ children, ...restProps }: JumbotronProps) => {
     return <Container {...restProps}>{children}</Container>;
+};
+
+Jumbotron.Title = ({ children, ...restProps }: JumbotronProps) => {
+    return <Title {...restProps}>{children}</Title>;
+};
+
+Jumbotron.SubTitle = ({ children, ...restProps }: JumbotronProps) => {
+    return <SubTitle {...restProps}>{children}</SubTitle>;
+};
+
+Jumbotron.Image = ({ ...restProps }: JumbotronImageProps) => {
+    return <Image {...restProps} />;
 };
 
 export default Jumbotron;
