@@ -4,7 +4,7 @@ import { Header } from '../components';
 import * as ROUTES from '../constants/routes';
 
 interface Props {
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }
 
 export const HeaderContainer = ({ children }: Props) => {

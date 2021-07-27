@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom';
 
 import * as ROUTES from './constants/routes';
 import { Home, SignIn } from './pages';
+import Signup from './pages/signup';
 
 const App = () => {
     return (
@@ -13,7 +14,7 @@ const App = () => {
                     <SignIn />
                 </Route>
                 <Route path={ROUTES.SIGN_UP}>
-                    <p>I will be the sign up page</p>
+                    <Signup />
                 </Route>
                 <Route path={ROUTES.BROWSE}>
                     <p>I will be the browse page</p>

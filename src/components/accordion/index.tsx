@@ -2,7 +2,7 @@ import React, { useState, useContext, createContext, SetStateAction, Dispatch } 
 import { Container, Inner, Item, Title, Header, Body, Frame } from './styles/accordion';
 
 interface Props {
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }
 
 interface ToggleShowInterface {

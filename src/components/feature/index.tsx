@@ -3,7 +3,7 @@ import React, { Children } from 'react';
 import { Container, Title, Subtitle } from './styles/feature';
 
 interface Props {
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }
 
 const Feature = ({ children, ...restProps }: Props) => {

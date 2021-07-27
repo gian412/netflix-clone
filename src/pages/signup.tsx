@@ -1,34 +1,45 @@
 import React, { useState } from 'react';
 
-import { Form } from '../components';
-import { FooterContainer } from '../containers/footer';
 import { HeaderContainer } from '../containers/header';
+import { FooterContainer } from '../containers/footer';
+import { Form } from '../components';
 import * as ROUTES from '../constants/routes';
 
-const SignIn = () => {
+const Signup = () => {
+    const [credential, setCredential] = useState({
+        firstName: '',
+        email: '',
+        password: '',
+    });
     const [error, setError] = useState('');
-    const [credential, setCredential] = useState({ email: '', password: '' });
 
-    const isInvalid = credential.email === '' || credential.password === '';
-
-    const handleSignIn = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        // TODO: Call firebase to authenticate the user. If there is an error, populate the error state
-    };
+    const isInvalid = credential.firstName === '' || credential.email === '' || credential.password === '';
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setCredential((prevState) => ({ ...prevState, [name]: value }));
     };
 
+    const handleSignUp = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        // TODO: Call firebase to register the user. If there is an error, populate the error state
+    };
+
     return (
         <>
             <HeaderContainer>
                 <Form>
-                    <Form.Title>Sign In</Form.Title>
+                    <Form.Title>Sign Up</Form.Title>
                     {error && <Form.Error>{error}</Form.Error>}
 
-                    <Form.Base onSubmit={handleSignIn} method="POST">
+                    <Form.Base onSubmit={handleSignUp} method="POST">
+                        <Form.Input
+                            type="text"
+                            name="firstName"
+                            placeholder="First Name"
+                            value={credential.firstName}
+                            onChange={handleInput}
+                        />
                         <Form.Input
                             type="email"
                             name="email"
@@ -45,10 +56,10 @@ const SignIn = () => {
                             onChange={handleInput}
                         />
                         <Form.Submit disabled={isInvalid} type="submit">
-                            Sign In
+                            Sign Up
                         </Form.Submit>
                         <Form.Text>
-                            New to Netflix? <Form.Link to={ROUTES.SIGN_UP}>Sign up now.</Form.Link>
+                            Already a user? <Form.Link to={ROUTES.SIGN_IN}>Sign in.</Form.Link>
                         </Form.Text>
                         <Form.TextSmall>This page is protected by Google reCAPTCHA.</Form.TextSmall>
                     </Form.Base>
@@ -59,4 +70,4 @@ const SignIn = () => {
     );
 };
 
-export default SignIn;
+export default Signup;

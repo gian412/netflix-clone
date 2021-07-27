@@ -5,11 +5,11 @@ import { Background, Container, Logo, ButtonLink } from './styles/header';
 
 interface Props {
     bg?: boolean;
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }
 
 interface AttributesProps {
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }
 
 interface LogoProps {
@@ -20,7 +20,7 @@ interface LogoProps {
 
 interface ButtonProps {
     to: string;
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }
 
 const Header = ({ bg = true, children, ...restProps }: Props) => {
