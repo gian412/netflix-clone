@@ -21,6 +21,7 @@ interface InputProps {
     placeholder?: string;
     value?: string;
     type?: string;
+    name?: string;
     autoComplete?: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     children?: React.ReactNode;
