@@ -3,24 +3,33 @@ import React from 'react';
 import { Container, Base, Title, Text, TextSmall, Link, Input, Submit, Error } from './styles/form';
 
 interface Props {
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }
 
 interface LinkProps {
     to: string;
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }
 
 interface BaseProps {
     onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
     method: string;
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }
 
 interface InputProps {
-    placeholder: string;
-    value: string;
-    // onChange: (event: React.Rea)
+    placeholder?: string;
+    value?: string;
+    type?: string;
+    autoComplete?: string;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    children?: React.ReactNode;
+}
+
+interface SubmitProps {
+    disabled?: boolean;
+    type?: 'button' | 'submit' | 'reset' | undefined;
+    children?: React.ReactNode;
 }
 
 const Form = ({ children, ...restProps }: Props) => {
@@ -55,11 +64,11 @@ Form.Link = ({ to, children, ...restProps }: LinkProps) => {
     );
 };
 
-Form.Input = ({ placeholder, value, onChange, children, ...restProps }: Props) => {
+Form.Input = ({ children, ...restProps }: InputProps) => {
     return <Input {...restProps}>{children}</Input>;
 };
 
-Form.Submit = ({ children, ...restProps }: Props) => {
+Form.Submit = ({ children, ...restProps }: SubmitProps) => {
     return <Submit {...restProps}>{children}</Submit>;
 };
 
