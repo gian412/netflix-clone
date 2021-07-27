@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { Form } from '../components';
+import { FooterContainer } from '../containers/footer';
 import { HeaderContainer } from '../containers/header';
 
 const SignIn = () => {
@@ -19,37 +20,40 @@ const SignIn = () => {
     };
 
     return (
-        <HeaderContainer>
-            <Form>
-                <Form.Title>Sign In</Form.Title>
-                {error && <Form.Error>{error}</Form.Error>}
+        <>
+            <HeaderContainer>
+                <Form>
+                    <Form.Title>Sign In</Form.Title>
+                    {error && <Form.Error>{error}</Form.Error>}
 
-                <Form.Base onSubmit={handleSignIn} method="POST">
-                    <Form.Input
-                        type="email"
-                        name="email"
-                        placeholder="Email address"
-                        value={credential.email}
-                        onChange={handleInput}
-                    />
-                    <Form.Input
-                        type="password"
-                        name="password"
-                        value={credential.password}
-                        autoComplete="off"
-                        placeholder="Password"
-                        onChange={handleInput}
-                    />
-                    <Form.Submit disabled={isInvalid} type="submit">
-                        Sign In
-                    </Form.Submit>
-                    <Form.Text>
-                        New to Netflix? <Form.Link to="/signup">Sign up now.</Form.Link>
-                    </Form.Text>
-                    <Form.TextSmall>This page is protected by Google reCAPTCHA.</Form.TextSmall>
-                </Form.Base>
-            </Form>
-        </HeaderContainer>
+                    <Form.Base onSubmit={handleSignIn} method="POST">
+                        <Form.Input
+                            type="email"
+                            name="email"
+                            placeholder="Email address"
+                            value={credential.email}
+                            onChange={handleInput}
+                        />
+                        <Form.Input
+                            type="password"
+                            name="password"
+                            value={credential.password}
+                            autoComplete="off"
+                            placeholder="Password"
+                            onChange={handleInput}
+                        />
+                        <Form.Submit disabled={isInvalid} type="submit">
+                            Sign In
+                        </Form.Submit>
+                        <Form.Text>
+                            New to Netflix? <Form.Link to="/signup">Sign up now.</Form.Link>
+                        </Form.Text>
+                        <Form.TextSmall>This page is protected by Google reCAPTCHA.</Form.TextSmall>
+                    </Form.Base>
+                </Form>
+            </HeaderContainer>
+            <FooterContainer />
+        </>
     );
 };
 
