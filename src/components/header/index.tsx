@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React from 'react';
 import { Link as ReachRouterLink } from 'react-router-dom';
 
 import { Background, Container, Logo, ButtonLink } from './styles/header';
@@ -24,7 +24,7 @@ interface ButtonProps {
 }
 
 const Header = ({ bg = true, children, ...restProps }: Props) => {
-    return bg ? <Background {...restProps}>{children}</Background> : <>children</>;
+    return bg ? <Background {...restProps}>{children}</Background> : <>{children}</>;
 };
 
 Header.Frame = ({ children, ...restProps }: AttributesProps) => {
