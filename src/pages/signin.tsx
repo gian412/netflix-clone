@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { Form } from '../components';
 import { FooterContainer } from '../containers/footer';
 import { HeaderContainer } from '../containers/header';
 import * as ROUTES from '../constants/routes';
+import { FirebaseContext } from '../context/firebase';
 
 const SignIn = () => {
+    const history = useHistory();
+    const { firebase } = useContext(FirebaseContext);
     const [error, setError] = useState('');
     const [credential, setCredential] = useState({ email: '', password: '' });
 
@@ -13,7 +17,16 @@ const SignIn = () => {
 
     const handleSignIn = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // TODO: Call firebase to authenticate the user. If there is an error, populate the error state
+
+        firebase
+            .auth()
+            .signInWithEmailAndPassword(credential.email, credential.password)
+            .then(() => {
+                setCredential({ email: '', password: '' });
+                setError('');
+                history.push(ROUTES.BROWSE);
+            })
+            .catch((error: any) => setError(error.message));
     };
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {

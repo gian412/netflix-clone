@@ -1,11 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router';
 
 import { HeaderContainer } from '../containers/header';
 import { FooterContainer } from '../containers/footer';
 import { Form } from '../components';
 import * as ROUTES from '../constants/routes';
+import { FirebaseContext } from '../context/firebase';
+
+interface Window {
+    firebase: any;
+}
 
 const Signup = () => {
+    const history = useHistory();
+    const { firebase } = useContext(FirebaseContext);
     const [credential, setCredential] = useState({
         firstName: '',
         email: '',
@@ -22,7 +30,23 @@ const Signup = () => {
 
     const handleSignUp = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // TODO: Call firebase to register the user. If there is an error, populate the error state
+
+        firebase
+            .auth()
+            .createUserWithEmailAndPassword(credential.email, credential.password)
+            .then((result: any) =>
+                result.user
+                    .updateProfile({
+                        displayName: credential.firstName,
+                        photoURL: Math.floor(Math.random() * 5) + 1,
+                    })
+                    .then(() => {
+                        setCredential({ email: '', password: '', firstName: credential.firstName });
+                        setError('');
+                        history.push(ROUTES.BROWSE);
+                    }),
+            )
+            .catch((error: any) => setError(error.message));
     };
 
     return (
