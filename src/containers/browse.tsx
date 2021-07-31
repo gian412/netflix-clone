@@ -61,7 +61,7 @@ export const BrowseContainer = () => {
                                     <Header.Link active="true">{user.displayName}</Header.Link>
                                 </Header.Group>
                                 <Header.Group>
-                                    <Header.Link active="true" onClick={() => firebase.auth().signOut()}>
+                                    <Header.Link active="true" onClick={() => firebase!.auth().signOut()}>
                                         Sign out
                                     </Header.Link>
                                 </Header.Group>

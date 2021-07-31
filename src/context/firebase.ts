@@ -1,7 +1,8 @@
+import Firebase from 'firebase';
 import { createContext } from 'react';
 
 interface Props {
-    firebase?: any;
+    firebase?: Firebase.app.App;
 }
 
 export const FirebaseContext = createContext<Props>({});

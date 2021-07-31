@@ -18,7 +18,7 @@ const SignIn = () => {
     const handleSignIn = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        firebase
+        firebase!
             .auth()
             .signInWithEmailAndPassword(credential.email, credential.password)
             .then(() => {

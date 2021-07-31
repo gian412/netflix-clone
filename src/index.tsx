@@ -4,10 +4,7 @@ import ReactDOM from 'react-dom';
 import { GlobalStyles } from './global-style';
 import App from './app';
 import { FirebaseContext } from './context/firebase';
-
-interface Window {
-    firebase: any;
-}
+import Firebase from 'firebase';
 
 const config = {
     apiKey: 'AIzaSyCodZlExiluGkW-Y_GkRvnm8ipjq1MNIaw',
@@ -19,12 +16,11 @@ const config = {
     appId: '1:691035459410:web:b8e74ef83de8baa246348b',
 };
 
-declare var window: Window;
-const firebase = window.firebase.initializeApp(config);
+const firebase = Firebase.initializeApp(config);
 
 ReactDOM.render(
     <React.StrictMode>
-        <FirebaseContext.Provider value={{ firebase: window.firebase }}>
+        <FirebaseContext.Provider value={{ firebase }}>
             <GlobalStyles />
             <App />
         </FirebaseContext.Provider>

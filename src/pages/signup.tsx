@@ -31,7 +31,7 @@ const Signup = () => {
     const handleSignUp = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        firebase
+        firebase!
             .auth()
             .createUserWithEmailAndPassword(credential.email, credential.password)
             .then((result: any) =>
