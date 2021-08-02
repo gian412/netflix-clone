@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
+import Fuse from 'fuse.js';
 
 import { Card, Header } from '../components';
 import * as ROUTES from '../constants/routes';
@@ -46,6 +47,15 @@ export const BrowseContainer = ({ slides }: Props) => {
     useEffect(() => {
         setSlideRows(slides[category]);
     }, [slides, category]);
+
+    useEffect(() => {
+        const fuse = new Fuse(slideRows, { keys: ['data.description', 'data.title', 'data.genre'] });
+        const results = fuse.search(searchTerm).map(({ item }) => item);
+
+        if (slideRows.length > 0 && searchTerm.length > 3 && results.length > 0) {
+            setSlideRows(slides[category]);
+        }
+    }, [searchTerm]);
 
     return profile.displayName ? (
         <>
