@@ -1,22 +1,34 @@
 import React, { useContext, useState, useEffect } from 'react';
 
-import { Header } from '../components';
+import { Card, Header } from '../components';
 import * as ROUTES from '../constants/routes';
 import { FirebaseContext } from '../context/firebase';
 import { SelectProfileContainer } from './profiles';
 import { FooterContainer } from './footer';
 import Loading from '../components/loading';
+import { Content } from '../types';
 
+interface Card {
+    title: string;
+    data: Content[];
+}
+interface Props {
+    slides: {
+        series: Card[];
+        films: Card[];
+    };
+}
 interface Profile {
     displayName?: string;
     photoURL?: string;
 }
 
-export const BrowseContainer = () => {
+export const BrowseContainer = ({ slides }: Props) => {
     const [profile, setProfile] = useState<Profile>({});
-    const [category, setCategory] = useState('series');
+    const [category, setCategory] = useState<'series' | 'films'>('series');
     const [searchTerm, setSearchTerm] = useState('');
     const [loading, setLoading] = useState(true);
+    const [slideRows, setSlideRows] = useState<Card[]>([]);
 
     const { firebase } = useContext(FirebaseContext);
 
@@ -30,6 +42,10 @@ export const BrowseContainer = () => {
             setLoading(false);
         }, 3000);
     }, [user]);
+
+    useEffect(() => {
+        setSlideRows(slides[category]);
+    }, [slides, category]);
 
     return profile.displayName ? (
         <>
@@ -79,6 +95,26 @@ export const BrowseContainer = () => {
                     <Header.PlayButton>Play</Header.PlayButton>
                 </Header.Feature>
             </Header>
+
+            <Card.Group>
+                {slideRows.map((slideItem) => (
+                    <Card key={`${category}-${slideItem.title.toLowerCase()}`}>
+                        <Card.Title>{slideItem.title}</Card.Title>
+                        <Card.Entities>
+                            {slideItem.data.map((item) => (
+                                <Card.Item key={item.docId} item={item}>
+                                    <Card.Image src={`/images/${category}/${item.genre}/${item.slug}/small.jpg`} />
+                                    <Card.Meta>
+                                        <Card.Subtitle>{item.title}</Card.Subtitle>
+                                        <Card.Text>{item.description}</Card.Text>
+                                    </Card.Meta>
+                                </Card.Item>
+                            ))}
+                        </Card.Entities>
+                    </Card>
+                ))}
+            </Card.Group>
+
             <FooterContainer />
         </>
     ) : (

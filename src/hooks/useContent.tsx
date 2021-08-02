@@ -1,9 +1,6 @@
 import { useEffect, useState, useContext } from 'react';
 import { FirebaseContext } from '../context/firebase';
-
-interface Content {
-    docId: string;
-}
+import { Content } from '../types';
 
 const useContent = (target: string) => {
     const [content, setContent] = useState<Content[]>([]);
@@ -21,7 +18,7 @@ const useContent = (target: string) => {
                     docId: contentObj.id,
                 }));
 
-                setContent(allContent);
+                setContent(allContent as Content[]);
             })
             .catch((error) => {
                 console.log(error.message);
