@@ -1,12 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
 import Fuse from 'fuse.js';
 
-import { Card, Header } from '../components';
+import { Card, Header, Loading, Player } from '../components';
 import * as ROUTES from '../constants/routes';
 import { FirebaseContext } from '../context/firebase';
 import { SelectProfileContainer } from './profiles';
 import { FooterContainer } from './footer';
-import Loading from '../components/loading';
 import { Content } from '../types';
 
 interface Card {
