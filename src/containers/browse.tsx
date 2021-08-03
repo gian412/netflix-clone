@@ -33,8 +33,8 @@ export const BrowseContainer = ({ slides }: Props) => {
     const { firebase } = useContext(FirebaseContext);
 
     const user = {
-        displayName: 'Karl',
-        photoURL: '1',
+        displayName: 'Gianluca',
+        photoURL: '4',
     };
 
     useEffect(() => {
@@ -120,6 +120,12 @@ export const BrowseContainer = ({ slides }: Props) => {
                                 </Card.Item>
                             ))}
                         </Card.Entities>
+                        <Card.Feature category={category}>
+                            <Player>
+                                <Player.Button />
+                                <Player.Video />
+                            </Player>
+                        </Card.Feature>
                     </Card>
                 ))}
             </Card.Group>
